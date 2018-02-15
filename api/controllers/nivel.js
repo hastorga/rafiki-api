@@ -32,7 +32,7 @@ function get_niveles(request, response) {
         link: request.url,
         estado: "500"
       })
-      return response.json({ errors: Error })
+      return response.status(400).json({ errors: Error })
     } else
       if (nivel.length == 0) {
         Error.push({
@@ -41,7 +41,7 @@ function get_niveles(request, response) {
           link: request.url,
           estado: "404"
         })
-        return response.json({ errors: Error })
+        return response.status(400).json({ errors: Error })
       } else {
         return response.status(200).json({
           link: request.url,
@@ -75,7 +75,7 @@ function getNivelId(request, response) {
       link: request.url,
       estado: "404"
     })
-    return response.json({ errors: Error })
+    return response.status(400).json({ errors: Error })
   }
   else {
     ModelNivel.findById(id, function (err, nivel) {
@@ -86,7 +86,7 @@ function getNivelId(request, response) {
           link: request.url,
           estado: "404"
         })
-        return response.json({ errors: Error })
+        return response.status(400).json({ errors: Error })
       } else
         if (err) {
           Error.push({
@@ -95,7 +95,7 @@ function getNivelId(request, response) {
             link: request.url,
             estado: "500"
           })
-          return response.json({ errors: Error })
+          return response.status(400).json({ errors: Error })
         }
         else {
           return response.status(200).json({
@@ -130,7 +130,7 @@ function createNivel(request, response) {
           link: request.url,
           estado: "500"
         })
-        response.json({ errors: Error })
+        response.status(400).json({ errors: Error })
       }
       else
         return response.status(200).json({
@@ -174,7 +174,7 @@ function updateNivel(request, response) {
           link: request.url,
           estado: "404"
         })
-        return response.json({ errors: Error })
+        return response.status(400).json({ errors: Error })
       } else
         if (err) {
           Error.push({
@@ -183,7 +183,7 @@ function updateNivel(request, response) {
             link: request.url,
             estado: "500"
           })
-          return response.json({ errors: Error })
+          return response.status(400).json({ errors: Error })
         }
         else {
 
@@ -220,7 +220,7 @@ function deleteNivel(request, response) {
       link: request.url,
       estado: "404"
     })
-    return response.json({ errors: Error })
+    return response.status(400).json({ errors: Error })
   } else {
 
     ModelNivel.findById(id, function (err, nivel) {
@@ -231,7 +231,7 @@ function deleteNivel(request, response) {
           link: request.url,
           estado: "500"
         })
-        return response.json({ errors: Error })
+        return response.status(400).json({ errors: Error })
       }
       else
         if (!nivel) {
@@ -241,7 +241,7 @@ function deleteNivel(request, response) {
             link: request.url,
             estado: "404"
           })
-          return response.json({ errors: Error })
+          return response.status(400).json({ errors: Error })
         } else {
 
           nivel.remove(id, function (err, nivel) {
